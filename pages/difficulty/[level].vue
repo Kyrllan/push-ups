@@ -59,7 +59,7 @@
       <h2>{{ restTimeLeft }}</h2>
     </div>
 
-    <div v-else class="counter-section">
+    <div v-else class="counter-section" @touchstart="incrementCount">
       <h2>{{ currentCount }}</h2>
     </div>
   </div>
@@ -114,7 +114,6 @@ const backgroundClass = computed(() => {
 const startCounting = () => {
   if (currentExerciseIndex.value < repetitions.length) {
     isCounting.value = true;
-    window.addEventListener("touchstart", incrementCount);
   }
 };
 
@@ -137,8 +136,6 @@ const finishCurrentExercise = () => {
   } else {
     reset();
   }
-
-  window.removeEventListener("touchstart", incrementCount);
 };
 
 const startRestPeriod = () => {
@@ -247,6 +244,10 @@ const backToMain = () => {
 .counter-section {
   text-align: center;
   font-size: 6rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header-button {

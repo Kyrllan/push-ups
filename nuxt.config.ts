@@ -28,12 +28,12 @@ export default defineNuxtConfig({
         },
       ],
     },
-    /*     workbox: {
+    workbox: {
       navigateFallback: "/",
     },
     devOptions: {
       enabled: true,
       type: "module",
-    }, */
+    },
   },
 });
