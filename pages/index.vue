@@ -43,7 +43,7 @@
         </NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/custom" class="menu-item"> Custom </NuxtLink>
+        <NuxtLink class="menu-item" disabled> Custom (Coming Soon) </NuxtLink>
       </li>
     </ul>
   </div>
