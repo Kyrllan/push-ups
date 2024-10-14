@@ -1,179 +1,107 @@
 <template>
-  <div :class="backgroundClass" class="counter-root">
-    <!-- Seção dos inputs e timer -->
-    <div class="inputs-section">
-      <div
-        v-for="(val, index) in exerciseArray"
-        :key="index"
-        class="input-container"
-      >
-        <input
-          v-model="exerciseArray[index]"
-          type="number"
-          min="1"
-          max="100"
-          class="exercise-input"
-          :disabled="isCounting || isResting"
-        />
-      </div>
-    </div>
-
-    <!-- Seção do descanso -->
-    <div>
-      <div v-if="isResting" class="timer">Rest: {{ restTimeLeft }}</div>
-    </div>
-    <!-- Seção do contador -->
-    <div class="counter-section">
-      <h2>{{ currentCount }}</h2>
-    </div>
-
-    <!-- Seção do botão Start -->
-    <div class="start-button-section">
-      <button @click="startCounting" :disabled="isCounting || isResting">
-        Start
-      </button>
-    </div>
+  <div class="home">
+    <h1>Push-ups</h1>
+    <ul class="menu">
+      <li>
+        <NuxtLink
+          :to="{ name: 'difficulty-level', params: { level: 'begginer' } }"
+          class="menu-item"
+        >
+          Beginners
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink
+          :to="{ name: 'difficulty-level', params: { level: 'easy' } }"
+          class="menu-item"
+        >
+          Easy
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink
+          :to="{ name: 'difficulty-level', params: { level: 'medium' } }"
+          class="menu-item"
+        >
+          Medium
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink
+          :to="{ name: 'difficulty-level', params: { level: 'intermediate' } }"
+          class="menu-item"
+        >
+          Intermediate
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink
+          :to="{ name: 'difficulty-level', params: { level: 'advanced' } }"
+          class="menu-item"
+        >
+          Advanced
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/custom" class="menu-item"> Custom </NuxtLink>
+      </li>
+    </ul>
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from "vue";
-
-const exerciseArray = ref([10, 10, 10, 10, 10]); // Array inicial com valores 1
-
-const currentCount = ref(0); // Valor do contador
-const currentExerciseIndex = ref(0); // Índice do exercício atual
-const isCounting = ref(false); // Flag para indicar se está contando
-const isResting = ref(false); // Flag para indicar se está no período de descanso
-const restTimeLeft = ref(5); // Tempo de descanso inicial (50 segundos)
-
-let restInterval = null; // Intervalo para o descanso
-
-// Computed para determinar a classe de fundo
-const backgroundClass = computed(() => {
-  if (isResting.value) {
-    return "resting-background";
-  } else if (isCounting.value) {
-    return "counting-background";
-  } else {
-    return "default-background";
-  }
-});
-
-// Função para iniciar o contador
-const startCounting = () => {
-  if (currentExerciseIndex.value < exerciseArray.value.length) {
-    isCounting.value = true;
-    window.addEventListener("click", incrementCount); // Substitua o 'click' por 'touchstart'
-  }
-};
-
-// Função para incrementar o contador ao tocar na tela
-const incrementCount = () => {
-  if (!isCounting.value) return;
-
-  currentCount.value += 1;
-
-  // Verifica se atingiu o valor atual do exercício
-  if (currentCount.value >= exerciseArray.value[currentExerciseIndex.value]) {
-    finishCurrentExercise();
-  }
-};
-
-// Função para finalizar o exercício atual e iniciar o descanso
-const finishCurrentExercise = () => {
-  isCounting.value = false;
-  currentExerciseIndex.value += 1;
-
-  if (currentExerciseIndex.value < exerciseArray.value.length) {
-    startRestPeriod();
-  } else {
-    reset();
-  }
-
-  window.removeEventListener("click", incrementCount); // Substitua o 'click' por 'touchstart'
-};
-
-// Função para iniciar o período de descanso
-const startRestPeriod = () => {
-  isResting.value = true;
-  restTimeLeft.value = 5;
-
-  restInterval = setInterval(() => {
-    restTimeLeft.value -= 1;
-
-    if (restTimeLeft.value <= 0) {
-      clearInterval(restInterval);
-      isResting.value = false;
-      currentCount.value = 0; // Reseta o contador para o próximo exercício
-      startCounting();
-    }
-  }, 1000);
-};
-
-// Função para resetar o app após terminar o último exercício
-const reset = () => {
-  currentCount.value = 0;
-  currentExerciseIndex.value = 0;
-};
-</script>
-
 <style scoped>
-/* Cor de fundo padrão */
-.default-background {
-  background-color: #4caf50;
-}
-
-/* Cor de fundo quando o contador está ativo */
-.counting-background {
-  background-color: #ff9800;
-}
-
-/* Cor de fundo quando está no período de descanso */
-.resting-background {
-  background-color: #81d4fa;
-}
-
-.counter-root {
-  display: grid;
-  grid-template-rows: 1fr 1fr 4fr 1fr;
-  height: 100vh;
-  width: 100vw;
-  justify-items: center;
-  align-items: center;
-}
-
-.inputs-section {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-.input-container {
+.home {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  height: 100vh;
+  background-color: #f7f8fa;
+  font-family: "Inter", sans-serif;
 }
-.exercise-input {
-  width: 60px;
-  text-align: center;
-  font-size: 18px;
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
 }
-.timer {
-  margin-top: 10px;
-  font-size: 20px;
-  color: red;
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
-.counter-section {
-  text-align: center;
-  font-size: 6rem;
-  margin-bottom: 6rem;
-}
-.start-button-section {
-  text-align: center;
-}
-button {
-  padding: 10px 20px;
-  font-size: 18px;
+
+.menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 600;
+  transition: all 0.3s ease;
   cursor: pointer;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background-color: #e8f0fe;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    gap: 1rem;
+  }
 }
 </style>
