@@ -1,5 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
@@ -37,6 +35,17 @@ export default defineNuxtConfig({
           options: {
             cacheName: "html-cache",
             expiration: {
+              maxEntries: 20,
+              maxAgeSeconds: 24 * 60 * 60,
+            },
+          },
+        },
+        {
+          urlPattern: ({ url }) => url.pathname.startsWith("/difficulty/"),
+          handler: "NetworkFirst",
+          options: {
+            cacheName: "dynamic-html-cache",
+            expiration: {
               maxEntries: 10,
               maxAgeSeconds: 24 * 60 * 60,
             },
@@ -44,9 +53,7 @@ export default defineNuxtConfig({
         },
         {
           urlPattern: ({ request }) =>
-            request.destination === "style" ||
-            request.destination === "script" ||
-            request.destination === "worker",
+            ["style", "script", "worker"].includes(request.destination),
           handler: "StaleWhileRevalidate",
           options: {
             cacheName: "assets-cache",
