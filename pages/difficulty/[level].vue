@@ -73,13 +73,13 @@ const route = useRoute();
 const router = useRouter();
 
 const difficulties = {
-  begginer: { title: "Beginners", repetitions: [4, 6, 8, 10], restTime: 90 },
-  easy: { title: "Easy", repetitions: [8, 10, 12, 14, 16], restTime: 80 },
-  medium: { title: "Medium", repetitions: [10, 12, 14, 16, 18], restTime: 70 },
+  begginer: { title: "Beginners", repetitions: [4, 6, 8, 10], restTime: 60 },
+  easy: { title: "Easy", repetitions: [8, 10, 12, 14, 16], restTime: 60 },
+  medium: { title: "Medium", repetitions: [10, 12, 14, 16, 18], restTime: 60 },
   intermediate: {
     title: "Intermediate",
     repetitions: [12, 14, 16, 18, 20],
-    restTime: 65,
+    restTime: 60,
   },
   advanced: {
     title: "Advanced",
