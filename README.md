@@ -1,10 +1,32 @@
-# Nuxt 3 Minimal Starter
+<div style="display: flex">
+<img src="https://github.com/Kyrllan/push-ups/blob/master/assets/css/IMG_4698-portrait.png" alt="Descrição da Imagem" width="300" />
+<img src="https://github.com/Kyrllan/push-ups/blob/master/assets/css/IMG_4699-left.png" alt="Descrição da Imagem" width="300" />
+</div>
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
+# Runtastic Push-Ups Clone
 
-Make sure to install the dependencies:
+Este é um clone do aplicativo Runtastic Push-Ups, desenvolvido como uma Progressive Web App (PWA) usando Nuxt 3. O aplicativo permite que os usuários registrem e acompanhem suas flexões de forma simples e prática.
+
+## Demonstração
+
+Você pode experimentar o aplicativo [aqui](https://push-ups-brown.vercel.app/).
+
+## Funcionalidades
+
+- Registro de flexões
+- Acompanhamento de treinos
+- Acesso offline como um aplicativo nativo
+- Interface simples e responsiva
+
+## Tecnologias Utilizadas
+
+- [Nuxt 3](https://nuxtjs.org)
+- Progressive Web App (PWA)
+
+## Configuração
+
+Certifique-se de instalar as dependências:
 
 ```bash
 # npm
@@ -18,58 +40,3 @@ yarn install
 
 # bun
 bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
